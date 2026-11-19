@@ -1,0 +1,42 @@
+---
+import { HERO } from '../data/tutor';
+import logo from '../assets/tungtung-tutor-logo.svg';
+---
+
+<section id="about" aria-labelledby="hero-title" class="border-b-4 border-ink">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
+    <div class="mb-8 flex flex-wrap items-center gap-3">
+      <img
+        src={logo.src}
+        alt="Tungtung Tutor Profile Logo"
+        width="56"
+        height="56"
+        class="h-12 w-12 sm:h-14 sm:w-14 rounded-md border-4 border-ink shadow-[4px_4px_0px_0px_#111827] bg-cream object-cover"
+      />
+      <span class="border-4 border-ink bg-ink px-3 py-1 font-display font-bold tracking-widest text-lime">{HERO.brand}</span>
+      <span class="border-2 border-ink bg-lime px-3 py-1 font-display text-xs font-bold sm:text-sm">{HERO.badge}</span>
+    </div>
+
+    <p class="mb-3 text-lg font-bold text-hot sm:text-2xl">{HERO.eyebrow}</p>
+    <h1 id="hero-title" class="max-w-4xl text-[2.6rem] font-black leading-[1.05] tracking-tight sm:text-7xl lg:text-8xl">
+      {HERO.title}
+    </h1>
+
+    <div class="mt-8 flex flex-wrap items-center gap-4 sm:ml-16">
+      <p class="max-w-xl text-xl font-extrabold sm:text-3xl">{HERO.tagline}</p>
+      <span class="rotate-1 rounded-md border-4 border-ink bg-hot px-3 py-1 font-bold text-white shadow-[4px_4px_0px_0px_#111827]">{HERO.tag}</span>
+    </div>
+
+    <div class="mt-14 sm:ml-auto sm:w-4/5 lg:w-3/5">
+      <h2 class="text-2xl font-black sm:text-3xl">{HERO.credentialsHeading}</h2>
+      <p class="mb-5 font-semibold underline decoration-lime decoration-4 underline-offset-4">{HERO.credentialsSub}</p>
+      <ul class="space-y-3 text-lg font-bold sm:text-xl">
+        {
+          HERO.credentials.map((c) => (
+            <li class="flex gap-3 border-l-8 border-ink pl-3">{c}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

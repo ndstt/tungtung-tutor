@@ -1,0 +1,45 @@
+---
+import { DETAILS, CTA, CONTACTS } from '../data/tutor';
+import SectionHeading from './SectionHeading.astro';
+
+const buttons = [
+  { label: 'LINE', href: CONTACTS.line },
+  { label: 'Facebook Messenger', href: CONTACTS.messenger },
+];
+---
+
+<section id="contact" aria-labelledby="details-title">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
+    <SectionHeading id="details-title" eyebrow="DETAILS">รายละเอียดการเรียน</SectionHeading>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {
+        DETAILS.map((d, i) => (
+          <article class="rounded-md border-4 border-ink bg-white p-5 shadow-[6px_6px_0px_0px_#111827]">
+            <p class="font-display text-sm font-bold text-hot">0{i + 1}</p>
+            <h3 class="text-xl font-black">{d.title}</h3>
+            <p class="font-semibold">{d.text}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 rounded-md border-4 border-ink bg-hot p-6 text-white shadow-[8px_8px_0px_0px_#111827] sm:p-10">
+      <h3 class="text-2xl font-black sm:text-4xl">{CTA.headline}</h3>
+      <p class="mt-5 inline-block border-4 border-ink bg-lime p-3 font-extrabold text-ink">{CTA.sub}</p>
+      <div class="mt-6 flex flex-wrap gap-4">
+        {
+          buttons.map((b) => (
+            <a
+              href={b.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-md border-4 border-ink bg-white px-5 py-3 font-black text-ink shadow-[4px_4px_0px_0px_#111827] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#111827]"
+            >
+              {b.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

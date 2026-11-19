@@ -1,0 +1,8 @@
+---
+const { id, eyebrow } = Astro.props as { id?: string; eyebrow?: string };
+---
+
+<div class="mb-10 border-b-4 border-ink pb-4">
+  {eyebrow && <p class="mb-2 inline-block bg-ink px-2 py-1 font-display text-xs font-bold tracking-widest text-lime">{eyebrow}</p>}
+  <h2 id={id} class="text-3xl font-black leading-tight sm:text-5xl"><slot /></h2>
+</div>

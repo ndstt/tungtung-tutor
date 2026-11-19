@@ -1,0 +1,22 @@
+---
+import { SITE } from '../data/tutor';
+import logo from '../assets/tungtung-tutor-logo.svg';
+---
+
+<footer class="border-t-4 border-ink bg-ink py-8 text-center text-sm font-semibold text-white">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-4 px-4 sm:flex-row sm:justify-between">
+    <div class="flex items-center gap-2.5 font-display text-base font-bold tracking-wider text-lime">
+      <img
+        src={logo.src}
+        alt="Tungtung Tutor Logo"
+        width="28"
+        height="28"
+        class="h-7 w-7 rounded border-2 border-white bg-cream"
+      />
+      <span>{SITE.name.toUpperCase()}</span>
+    </div>
+    <p class="text-xs text-gray-300 sm:text-sm">
+      © {new Date().getFullYear()} {SITE.name} • สงวนลิขสิทธิ์
+    </p>
+  </div>
+</footer>

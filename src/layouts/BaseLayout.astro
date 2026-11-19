@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import { SITE, COURSES, PRICING } from '../data/tutor';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = SITE.title, description = SITE.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+const orgId = `${SITE.url}/#organization`;
+const logoUrl = `${SITE.url}/tungtung-tutor-logo.svg`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'EducationalOrganization',
+      '@id': orgId,
+      name: SITE.name,
+      url: SITE.url,
+      logo: logoUrl,
+      image: logoUrl,
+      description,
+      availableLanguage: ['Thai', 'English'],
+    },
+    ...COURSES.map((c, i) => ({
+      '@type': 'Course',
+      name: c.title.replace(/^(f\(x\)|<\/>)\s*/, ''),
+      description: c.topics.join(' • '),
+      provider: { '@id': orgId },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'THB',
+        price: String(i === 0 ? PRICING.rows[0].math : PRICING.rows[0].prog),
+        category: 'ต่อชั่วโมง (เรียนเดี่ยว)',
+      },
+      hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online' },
+    })),
+  ],
+};
+---
+
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/tungtung-tutor-logo.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={logoUrl} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={logoUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="selection:bg-lime">
+    <slot />
+  </body>
+</html>

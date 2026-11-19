@@ -1,0 +1,14 @@
+---
+import { COURSES } from '../data/tutor';
+import BrutalistCard from './BrutalistCard.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="courses" aria-labelledby="courses-title" class="border-b-4 border-ink">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
+    <SectionHeading id="courses-title" eyebrow="COURSES">หมวดวิชาที่สอน</SectionHeading>
+    <div class="grid gap-8 md:grid-cols-2">
+      {COURSES.map((c) => <BrutalistCard title={c.title} tag={c.tag} accent={c.accent} topics={c.topics} dark={c.dark} />)}
+    </div>
+  </div>
+</section>

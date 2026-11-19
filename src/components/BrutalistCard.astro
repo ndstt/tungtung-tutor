@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  tag: string;
+  accent: string;
+  topics: readonly string[];
+  dark?: boolean;
+}
+const { title, tag, accent, topics, dark = false } = Astro.props;
+---
+
+<article
+  class="flex h-full flex-col rounded-md border-4 border-ink bg-white shadow-[6px_6px_0px_0px_#111827] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0px_0px_#111827]"
+>
+  <header
+    class:list={['flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink p-5', dark ? 'text-white' : 'text-ink']}
+    style={`background-color:${accent}`}
+  >
+    <h3 class="font-display text-2xl font-bold sm:text-3xl">{title}</h3>
+    <span class="rounded-md border-2 border-ink bg-white px-3 py-1 text-sm font-bold text-ink">{tag}</span>
+  </header>
+  <ul class="flex-1 space-y-3 p-5">
+    {
+      topics.map((t) => (
+        <li class="flex gap-3 font-semibold">
+          <span class="mt-2 h-3 w-3 shrink-0 border-2 border-ink" style={`background-color:${accent}`} aria-hidden="true" />
+          <span>{t}</span>
+        </li>
+      ))
+    }
+  </ul>
+</article>
